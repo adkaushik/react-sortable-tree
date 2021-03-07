@@ -15,10 +15,6 @@ coverage
 
 # Build directories (Will be preserved by npm)
 .cache
-dist
-build
-style.css
-style.css.map
 
 # Error files
 yarn-error.log
