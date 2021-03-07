@@ -6,6 +6,7 @@
     "prebuild": "yarn run lint && yarn run clean",
     "build": "rollup -c",
     "build:storybook": "build-storybook -o build",
+    "install": "yarn run build",
     "clean": "rimraf dist",
     "clean:storybook": "rimraf build",
     "lint": "eslint src",
