@@ -2734,12 +2734,16 @@ function (_Component) {
   }, {
     key: "handleDndMonitorChange",
     value: function handleDndMonitorChange() {
+      var _this2 = this;
+
       var monitor = this.props.dragDropManager.getMonitor(); // If the drag ends and the tree is still in a mid-drag state,
       // it means that the drag was canceled or the dragSource dropped
       // elsewhere, and we should reset the state of this tree
 
       if (!monitor.isDragging() && this.state.draggingTreeData) {
-        setTimeout(this.endDrag());
+        setTimeout(function () {
+          _this2.endDrag();
+        });
       }
     }
   }, {
@@ -2806,14 +2810,14 @@ function (_Component) {
   }, {
     key: "startDrag",
     value: function startDrag(_ref4) {
-      var _this2 = this;
+      var _this3 = this;
 
       var path = _ref4.path;
       this.setState(function (prevState) {
         var _removeNode = removeNode({
           treeData: prevState.instanceProps.treeData,
           path: path,
-          getNodeKey: _this2.props.getNodeKey
+          getNodeKey: _this3.props.getNodeKey
         }),
             draggingTreeData = _removeNode.treeData,
             draggedNode = _removeNode.node,
@@ -2831,7 +2835,7 @@ function (_Component) {
   }, {
     key: "dragHover",
     value: function dragHover(_ref5) {
-      var _this3 = this;
+      var _this4 = this;
 
       var draggedNode = _ref5.node,
           draggedDepth = _ref5.depth,
@@ -2854,10 +2858,10 @@ function (_Component) {
           depth: draggedDepth,
           minimumTreeIndex: draggedMinimumTreeIndex,
           expandParent: true,
-          getNodeKey: _this3.props.getNodeKey
+          getNodeKey: _this4.props.getNodeKey
         });
 
-        var rows = _this3.getRows(addedResult.treeData);
+        var rows = _this4.getRows(addedResult.treeData);
 
         var expandedParentPath = rows[addedResult.treeIndex].path;
         return {
@@ -2873,7 +2877,7 @@ function (_Component) {
                 expanded: true
               });
             },
-            getNodeKey: _this3.props.getNodeKey
+            getNodeKey: _this4.props.getNodeKey
           }),
           // reset the scroll focus so it doesn't jump back
           // to a search result while dragging
@@ -2885,12 +2889,12 @@ function (_Component) {
   }, {
     key: "endDrag",
     value: function endDrag(dropResult) {
-      var _this4 = this;
+      var _this5 = this;
 
       var instanceProps = this.state.instanceProps;
 
       var resetTree = function resetTree() {
-        return _this4.setState({
+        return _this5.setState({
           draggingTreeData: null,
           draggedNode: null,
           draggedMinimumTreeIndex: null,
@@ -3032,7 +3036,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       var _mergeTheme3 = mergeTheme(this.props),
           dragDropManager = _mergeTheme3.dragDropManager,
@@ -3109,15 +3113,15 @@ function (_Component) {
               width = _ref11.width;
           return React.createElement(ScrollZoneVirtualList, _extends({}, scrollToInfo, {
             dragDropManager: dragDropManager,
-            verticalStrength: _this5.vStrength,
-            horizontalStrength: _this5.hStrength,
+            verticalStrength: _this6.vStrength,
+            horizontalStrength: _this6.hStrength,
             speed: 30,
             scrollToAlignment: "start",
             className: "rst__virtualScrollOverride",
             width: width,
             onScroll: function onScroll(_ref12) {
               var scrollTop = _ref12.scrollTop;
-              _this5.scrollTop = scrollTop;
+              _this6.scrollTop = scrollTop;
             },
             height: height,
             style: innerStyle,
@@ -3135,7 +3139,7 @@ function (_Component) {
             rowRenderer: function rowRenderer(_ref14) {
               var index = _ref14.index,
                   rowStyle = _ref14.style;
-              return _this5.renderRow(rows[index], {
+              return _this6.renderRow(rows[index], {
                 listIndex: index,
                 style: rowStyle,
                 getPrevRow: function getPrevRow() {
@@ -3152,7 +3156,7 @@ function (_Component) {
       } else {
         // Render list without react-virtualized
         list = rows.map(function (row, index) {
-          return _this5.renderRow(row, {
+          return _this6.renderRow(row, {
             listIndex: index,
             style: {
               height: typeof rowHeight !== 'function' ? rowHeight : rowHeight({
